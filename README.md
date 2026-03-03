@@ -74,11 +74,33 @@ widget.interactive()
 ## Project Structure
 
 ```
-connmatrixhops/
-├── __init__.py      # Package exports
-├── analyzer.py      # MatrixAnalyzer: core traversal & data logic
-├── plotting.py      # Visualization (heatmaps, cluster strips)
-└── widgets.py       # Jupyter ipywidgets wrapper
+ConnMatrixHops/
+├── connmatrixhops/       # Package source
+│   ├── __init__.py
+│   ├── analyzer.py       # MatrixAnalyzer: core traversal & data logic
+│   ├── plotting.py       # Visualization (heatmaps, cluster strips)
+│   └── widgets.py        # Jupyter ipywidgets wrapper
+├── data/toy_data/        # Example input data
+├── figures/              # Example output plots
+├── notebooks/            # Demo notebooks
+├── tests/                # Unit tests
+├── environment/          # Code Ocean environment (Dockerfile, postInstall)
+└── run                   # Code Ocean entrypoint script
+```
+
+## Code Ocean
+
+This repo is structured as a [Code Ocean](https://codeocean.com/) capsule.
+
+- **Environment**: `environment/Dockerfile` uses a Python 3.11 base image; `environment/postInstall` installs all dependencies via pip.
+- **Run**: the `run` script executes both notebooks in sequence and writes outputs to `/results`.
+- **Data**: toy data lives in `data/toy_data/` and is accessed via relative paths from the notebooks.
+
+To reproduce locally with Docker:
+
+```bash
+docker build -t connmatrixhops -f environment/Dockerfile .
+docker run -v $(pwd):/code -v /tmp/results:/results connmatrixhops /code/run
 ```
 
 ## License
