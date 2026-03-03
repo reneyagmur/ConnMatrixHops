@@ -6,14 +6,16 @@ ConnMatrixHops performs BFS-style traversal from seed neurons through a directed
 
 ## Installation
 
+From the repo root:
+
 ```bash
-pip install -e .
+pip install -e code/
 ```
 
 For development:
 
 ```bash
-pip install -e ".[dev]"
+pip install -e "code/[dev]"
 ```
 
 ## Quick Start
@@ -75,17 +77,15 @@ widget.interactive()
 
 ```
 ConnMatrixHops/
-├── connmatrixhops/       # Package source
-│   ├── __init__.py
-│   ├── analyzer.py       # MatrixAnalyzer: core traversal & data logic
-│   ├── plotting.py       # Visualization (heatmaps, cluster strips)
-│   └── widgets.py        # Jupyter ipywidgets wrapper
+├── code/
+│   ├── connmatrixhops/   # Package source
+│   ├── notebooks/        # Demo notebooks
+│   ├── tests/            # Unit tests
+│   ├── pyproject.toml
+│   └── run               # Code Ocean entrypoint script
 ├── data/toy_data/        # Example input data
-├── figures/              # Example output plots
-├── notebooks/            # Demo notebooks
-├── tests/                # Unit tests
 ├── environment/          # Code Ocean environment (Dockerfile, postInstall)
-└── run                   # Code Ocean entrypoint script
+└── figures/              # Example output plots
 ```
 
 ## Code Ocean
@@ -93,15 +93,8 @@ ConnMatrixHops/
 This repo is structured as a [Code Ocean](https://codeocean.com/) capsule.
 
 - **Environment**: `environment/Dockerfile` uses a Python 3.11 base image; `environment/postInstall` installs all dependencies via pip.
-- **Run**: the `run` script executes both notebooks in sequence and writes outputs to `/results`.
-- **Data**: toy data lives in `data/toy_data/` and is accessed via relative paths from the notebooks.
-
-To reproduce locally with Docker:
-
-```bash
-docker build -t connmatrixhops -f environment/Dockerfile .
-docker run -v $(pwd):/code -v /tmp/results:/results connmatrixhops /code/run
-```
+- **Run**: set `code/run` as the "File to Run" in Code Ocean. It executes both notebooks and writes outputs to `/results`.
+- **Data**: toy data lives in `data/toy_data/`, mounted at `/data/toy_data/` in Code Ocean. Notebooks auto-detect the environment.
 
 ## License
 
