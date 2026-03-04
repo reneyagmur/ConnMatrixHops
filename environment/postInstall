@@ -4,5 +4,3 @@ set -e
 pip install --no-cache-dir \
     "seaborn>=0.11" \
     "ipywidgets>=8.0"
-
-pip install --no-cache-dir /code/

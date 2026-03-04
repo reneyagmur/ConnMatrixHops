@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+pip install --no-cache-dir /code/
+
 jupyter nbconvert --to notebook --execute \
-    code/notebooks/02_demo_connmatrixhops.ipynb --output-dir=/results
+    /code/notebooks/01_create_toy_data.ipynb --output-dir=/results
+
+jupyter nbconvert --to notebook --execute \
+    /code/notebooks/02_demo_connmatrixhops.ipynb --output-dir=/results
